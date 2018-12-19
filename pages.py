@@ -15,7 +15,7 @@ class BasePage:
         actions.perform()
 
 
-    def click(self, val, timeout=3):
+    def click(self, val, timeout=5):
         WebDriverWait(self.driver, timeout).until(expected_conditions.presence_of_element_located((val)))
         self.scroll(*val)
         self.driver.find_element(*val).click()
