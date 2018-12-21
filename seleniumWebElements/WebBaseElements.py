@@ -2,11 +2,17 @@ from selenium import webdriver
 
 
 class WebBaseElement:
-    def __init__(self, driver):
-        self.driver = driver
+    def __init__(self, by, value):
+        self.by = by
+        self.value = value
 
+    def __get__(self, obj):
+        self.driver = obj.driver
 
     def get_driver_and_page(self, driver_path, page_url):
+        """
+        Get driver and go to some web-page
+        """
         try:
             self.driver = webdriver.Chrome(executable_path=driver_path)
             self.driver.get(page_url)
@@ -15,24 +21,32 @@ class WebBaseElement:
         except Exception:
             return False
 
-
-    def is_present(self, *val):
-        if self.driver.find_element(*val):
+    def is_present(self, by, value):
+        """
+        Check is element present
+        """
+        if self.driver.find_element(by, value):
             return True
         else:
             return False
 
-
-    def is_not_present(self, *val):
-        if not(self.driver.find_element(*val)):
+    def is_not_present(self, by, value):
+        """
+        Check is element not present
+        """
+        if not(self.driver.find_element(by, value)):
             return True
         else:
             return False
 
+    def get_text(self, by, value):
+        """
+        Get text from element
+        """
+        return self.driver.find_element(by, value).text
 
-    def get_text(self, *val):
-        return self.driver.find_element(*val).text
-
-
-    def get_attribute(self, val, key):
-        return self.driver.find_element(*val).get_attribute(key)
+    def get_attribute(self, by, value, key):
+        """
+        Get attribute parameter
+        """
+        return self.driver.find_element(by, value).get_attribute(key)
