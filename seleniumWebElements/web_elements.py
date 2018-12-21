@@ -1,30 +1,13 @@
-from seleniumWebElements.WebBaseElements import WebBaseElement
+from seleniumWebElements.web_base_elements import WebBaseElement
 from seleniumWebElements.IClick import IClick
-
-
-class TimeOutConstants:
-    """
-    Class of timeout constants
-    """
-    def __init__(self, by, value):
-        self.by = by
-        self.value = value
-
-    def __get__(self, obj):
-        self.driver = obj.driver
-
-    PAGE_LOAD_TIMEOUT = 10
-    LINK_LOAD_TIMEOUT = 10
-    BUTTON_TIMEOUT = 3
+from seleniumWebElements.time_class_constants import TimeOutConstants
 
 
 class WebLabel(WebBaseElement):
     def __init__(self, by, value):
         self.by = by
         self.value = value
-
-    def __get__(self, obj):
-        self.driver = obj.driver
+        WebBaseElement.__init__(self, by, value)
 
     def get_text(self, by, value):
         """
@@ -46,9 +29,8 @@ class WebButton(WebBaseElement, IClick):
     def __init__(self, by, value):
         self.by = by
         self.value = value
+        WebBaseElement.__init__(self, by, value)
 
-    def __get__(self, obj):
-        self.driver = obj.driver
 
     def click(self, by, value, timeout=TimeOutConstants.BUTTON_TIMEOUT):
         """
@@ -67,9 +49,7 @@ class WebInput(WebBaseElement):
     def __init__(self, by, value):
         self.by = by
         self.value = value
-
-    def __get__(self, obj):
-        self.driver = obj.driver
+        WebBaseElement.__init__(self, by, value)
 
     def clear(self, by, value):
         """
@@ -89,9 +69,7 @@ class WebRadioButton(WebBaseElement):
     def __init__(self, by, value):
         self.by = by
         self.value = value
-
-    def __get__(self, obj):
-        self.driver = obj.driver
+        WebBaseElement.__init__(self, by, value)
 
     def check(self, by, value):
         """
@@ -110,9 +88,7 @@ class WebCheckBox(WebBaseElement):
     def __init__(self, by, value):
         self.by = by
         self.value = value
-
-    def __get__(self, obj):
-        self.driver = obj.driver
+        WebBaseElement.__init__(self, by, value)
 
     def check(self, by, value):
         """
@@ -131,9 +107,7 @@ class WebLink(WebBaseElement, IClick):
     def __init__(self, by, value):
         self.by = by
         self.value = value
-
-    def __get__(self, obj):
-        self.driver = obj.driver
+        WebBaseElement.__init__(self, by, value)
 
     def click(self, by, value, timeout=TimeOutConstants.LINK_LOAD_TIMEOUT):
         """

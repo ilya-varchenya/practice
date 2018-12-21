@@ -2,17 +2,13 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-from seleniumWebElements.WebHelpers import WebHelpers
-from seleniumWebElements.WebElements import TimeOutConstants
+from seleniumWebElements.web_helpers import WebHelpers
+from seleniumWebElements.web_elements import TimeOutConstants
 
 
 class IClick:
-    def __init__(self, by, value):
-        self.by = by
-        self.value = value
-
-    def __get__(self, obj):
-        self.driver = obj.driver
+    def __init__(self, driver):
+        self.driver = driver
 
     def is_clickable(self, by, value, timeout=TimeOutConstants.BUTTON_TIMEOUT):
         """

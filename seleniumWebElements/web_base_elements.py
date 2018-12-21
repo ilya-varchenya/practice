@@ -1,4 +1,9 @@
-from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
+
+from seleniumWebElements.time_class_constants import TimeOutConstants
+from seleniumWebElements.web_helpers import WebHelpers
 
 
 class WebBaseElement:
@@ -9,17 +14,17 @@ class WebBaseElement:
     def __get__(self, obj):
         self.driver = obj.driver
 
-    def get_driver_and_page(self, driver_path, page_url):
+    def get_element(self, timeout=TimeOutConstants.BUTTON_TIMEOUT):
         """
-        Get driver and go to some web-page
+        Get element from page
         """
         try:
-            self.driver = webdriver.Chrome(executable_path=driver_path)
-            self.driver.get(page_url)
-            self.driver.implicitly_wait(10)
-            return self.driver
-        except Exception:
+            element = WebDriverWait(self.driver, timeout).until(expected_conditions.presence_of_element_located((self.by, self.value)))
+            WebHelpers.scroll(self.by, self.value)
+            self.driver.find_element(self.by, self.value).click()
+        except NoSuchElementException:
             return False
+        return element
 
     def is_present(self, by, value):
         """
@@ -50,3 +55,7 @@ class WebBaseElement:
         Get attribute parameter
         """
         return self.driver.find_element(by, value).get_attribute(key)
+
+    def with_text(self, text):
+        self.value = self.value.format(text)
+        return self

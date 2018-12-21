@@ -5,20 +5,16 @@ from selenium.webdriver import ActionChains
 
 
 class WebHelpers:
-    def __init__(self, by, value):
-        self.by = by
-        self.value = value
-
     def __get__(self, obj):
         self.driver = obj.driver
 
-    def scroll(self, by, value):
+    def scroll(self, val):
         """
         Scroll page to element
         """
         try:
             actions = ActionChains(self.driver)
-            target = self.driver.find_element(by, value)
+            target = self.driver.find_element(*val)
             actions.move_to_element(target)
             actions.perform()
         except NoSuchElementException:
@@ -43,34 +39,34 @@ class WebHelpers:
             return False
         return True
 
-    def double_click(self, by, value):
+    def double_click(self, val):
         """
         Double click on element
         """
         try:
-            el = self.driver.find_element(by, value)
+            el = self.driver.find_element(*val)
             ActionChains(self.driver).double_click(el).perform()
         except NoSuchElementException:
             return False
         return True
 
-    def right_click(self, by, value):
+    def right_click(self, val):
         """
         Click on element with right mouse button
         """
         try:
-            el = self.driver.find_element(by, value)
+            el = self.driver.find_element(*val)
             ActionChains(self.driver).context_click(el).perform()
         except NoSuchElementException:
             return False
         return True
 
-    def long_click(self, by, value):
+    def long_click(self, val):
         """
         Long click on element
         """
         try:
-            el = self.driver.find_element(by, value)
+            el = self.driver.find_element(*val)
             ActionChains(self.driver).click_and_hold(el).perform()
         except NoSuchElementException:
             return False
