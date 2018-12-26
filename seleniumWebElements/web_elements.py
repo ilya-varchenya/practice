@@ -32,20 +32,7 @@ class WebButton(WebBaseElement, IClick):
         WebBaseElement.__init__(self, by, value)
 
 
-    def click(self, by, value, timeout=TimeOutConstants.BUTTON_TIMEOUT):
-        """
-        Click on element
-        """
-        self.click(by, value, timeout)
-
-    def is_clickable(self, by, value, timeout=TimeOutConstants.BUTTON_TIMEOUT):
-        """
-        Check is element clickable
-        """
-        self.is_clickable(by, value, timeout)
-
-
-class WebInput(WebBaseElement):
+class WebInput(WebBaseElement, IClick):
     def __init__(self, by, value):
         self.by = by
         self.value = value
@@ -65,17 +52,11 @@ class WebInput(WebBaseElement):
         self.driver.find_element(by, value).send_keys(input_text)
 
 
-class WebRadioButton(WebBaseElement):
+class WebRadioButton(WebBaseElement, IClick):
     def __init__(self, by, value):
         self.by = by
         self.value = value
         WebBaseElement.__init__(self, by, value)
-
-    def check(self, by, value):
-        """
-        Check some choice
-        """
-        self.driver.find_element(by, value).click()
 
     def is_checked(self, by, value):
         """
@@ -84,17 +65,11 @@ class WebRadioButton(WebBaseElement):
         return self.driver.findElements(by, value).getAttribute("checked")
 
 
-class WebCheckBox(WebBaseElement):
+class WebCheckBox(WebBaseElement, IClick):
     def __init__(self, by, value):
         self.by = by
         self.value = value
         WebBaseElement.__init__(self, by, value)
-
-    def check(self, by, value):
-        """
-        Check some choice
-        """
-        self.driver.find_element(by, value).click()
 
     def is_checked(self, by, value):
         """
@@ -108,15 +83,3 @@ class WebLink(WebBaseElement, IClick):
         self.by = by
         self.value = value
         WebBaseElement.__init__(self, by, value)
-
-    def click(self, by, value, timeout=TimeOutConstants.LINK_LOAD_TIMEOUT):
-        """
-        Click on element
-        """
-        self.click(by, value, timeout)
-
-    def is_clickable(self, by, value, timeout=TimeOutConstants.LINK_LOAD_TIMEOUT):
-        """
-        Check is element clickable
-        """
-        self.is_clickable(by, value, timeout)

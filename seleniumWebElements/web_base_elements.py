@@ -11,8 +11,9 @@ class WebBaseElement:
         self.by = by
         self.value = value
 
-    def __get__(self, obj):
+    def __get__(self, obj, owner):
         self.driver = obj.driver
+        return self
 
     def get_element(self, timeout=TimeOutConstants.BUTTON_TIMEOUT):
         """

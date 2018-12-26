@@ -3,6 +3,8 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
 
+from seleniumWebElements.time_class_constants import TimeOutConstants
+
 
 class BasePage:
     def __init__(self, driver):
@@ -15,7 +17,7 @@ class BasePage:
         actions.perform()
 
 
-    def click(self, val, timeout=5):
+    def click(self, val, timeout=TimeOutConstants.BUTTON_TIMEOUT):
         WebDriverWait(self.driver, timeout).until(expected_conditions.presence_of_element_located((val)))
         self.scroll(*val)
         self.driver.find_element(*val).click()
