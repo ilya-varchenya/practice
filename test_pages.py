@@ -5,10 +5,8 @@ from selenium import webdriver
 class TestForCars:
     def setup(self):
         self.driver = webdriver.Chrome(executable_path="drivers\chromedriver.exe")
-        # self.driver.set_window_size(1200, 1000)
         self.driver.get("https://www.onliner.by/")
         self.driver.implicitly_wait(10)
-        # self.car_name = "Toyota Camry"
 
     def teardown(self):
         self.driver.quit()
@@ -45,5 +43,3 @@ class TestForCars:
 
         car = auto_page.go_to_car_page()
         assert car.is_open()
-
-
