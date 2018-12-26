@@ -1,4 +1,4 @@
-from pages import *
+from firstTasks.pages import *
 from selenium import webdriver
 
 
