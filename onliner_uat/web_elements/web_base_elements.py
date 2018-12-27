@@ -2,8 +2,8 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-from seleniumWebElements.time_class_constants import TimeOutConstants
-from seleniumWebElements.web_helpers import WebHelpers
+from onliner_uat.web_elements.time_class_constants import TimeOutConstants
+from onliner_uat.web_elements.web_helpers import WebHelpers
 
 
 class WebBaseElement:
@@ -27,35 +27,46 @@ class WebBaseElement:
             return False
         return element
 
-    def is_present(self, by, value):
+    def is_present(self):
         """
         Check is element present
         """
-        if self.driver.find_element(by, value):
+        if self.driver.find_element(self.by, self.value):
             return True
         else:
             return False
 
-    def is_not_present(self, by, value):
+    def is_not_present(self):
         """
         Check is element not present
         """
-        if not(self.driver.find_element(by, value)):
+        if not(self.driver.find_element(self.by, self.value)):
             return True
         else:
             return False
 
-    def get_text(self, by, value):
+    def get_text(self):
         """
         Get text from element
         """
-        return self.driver.find_element(by, value).text
+        return self.driver.find_element(self.by, self.value).text
 
-    def get_attribute(self, by, value, key):
+    def get_text_from_amount_of_elements(self):
+        """
+        Get text from amount of elements
+        """
+        l_of_text = []
+        els = self.driver.find_elements(self.by, self.value)
+        for i in range(len(els)):
+            el = els[i].text.lower()
+            l_of_text.append(el)
+        return l_of_text
+
+    def get_attribute(self, key):
         """
         Get attribute parameter
         """
-        return self.driver.find_element(by, value).get_attribute(key)
+        return self.driver.find_element(self.by, self.value).get_attribute(key)
 
     def with_text(self, text):
         self.value = self.value.format(text)

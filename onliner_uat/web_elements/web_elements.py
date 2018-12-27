@@ -1,6 +1,5 @@
-from seleniumWebElements.web_base_elements import WebBaseElement
-from seleniumWebElements.IClick import IClick
-from seleniumWebElements.time_class_constants import TimeOutConstants
+from onliner_uat.web_elements.web_base_elements import WebBaseElement
+from onliner_uat.web_elements.IClick import IClick
 
 
 class WebLabel(WebBaseElement):
@@ -9,18 +8,24 @@ class WebLabel(WebBaseElement):
         self.value = value
         WebBaseElement.__init__(self, by, value)
 
-    def get_text(self, by, value):
+    def get_text(self):
         """
         Get text from element
         """
-        return self.driver.find_element(by, value).text
+        return super().get_text()
 
-    def get_text_as_int(self, by, value):
+    def get_text_from_amount_of_elements(self):
+        """
+        Get text from amount of elements
+        """
+        return super().get_text_from_amount_of_elements()
+
+    def get_text_as_int(self):
         """
         Get text from element as integer
         """
         try:
-            return int(self.driver.find_element(by, value).text)
+            return int(self.driver.find_element(self.by, self.value).text)
         except ValueError:
             return False
 
@@ -38,18 +43,18 @@ class WebInput(WebBaseElement, IClick):
         self.value = value
         WebBaseElement.__init__(self, by, value)
 
-    def clear(self, by, value):
+    def clear(self):
         """
         Clear input text fields
         """
-        self.driver.find_element(by, value).clear()
+        self.driver.find_element(self.by, self.value).clear()
 
-    def set_text(self, by, value, input_text):
+    def set_text(self, input_text):
         """
         Clear input text fields and type text there
         """
-        self.clear(by, value)
-        self.driver.find_element(by, value).send_keys(input_text)
+        self.clear()
+        self.driver.find_element(self.by, self.value).send_keys(input_text)
 
 
 class WebRadioButton(WebBaseElement, IClick):
@@ -58,11 +63,11 @@ class WebRadioButton(WebBaseElement, IClick):
         self.value = value
         WebBaseElement.__init__(self, by, value)
 
-    def is_checked(self, by, value):
+    def is_checked(self):
         """
         Check is element checked
         """
-        return self.driver.findElements(by, value).getAttribute("checked")
+        return self.driver.findElements(self.by, self.value).getAttribute("checked")
 
 
 class WebCheckBox(WebBaseElement, IClick):
@@ -71,11 +76,11 @@ class WebCheckBox(WebBaseElement, IClick):
         self.value = value
         WebBaseElement.__init__(self, by, value)
 
-    def is_checked(self, by, value):
+    def is_checked(self):
         """
         Check is element checked
         """
-        return self.driver.findElements(by, value).getAttribute('selected')
+        return self.driver.findElements(self.by, self.value).getAttribute('selected')
 
 
 class WebLink(WebBaseElement, IClick):
