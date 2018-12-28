@@ -2,7 +2,6 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-from onliner_uat.web_elements.web_helpers import WebHelpers
 from onliner_uat.web_elements.time_class_constants import TimeOutConstants
 
 
@@ -31,7 +30,6 @@ class IClick:
         """
         try:
             WebDriverWait(self.driver, timeout).until(expected_conditions.presence_of_element_located((self.by, self.value)))
-            WebHelpers.scroll(self.by, self.value)
             self.driver.find_element(self.by, self.value).click()
         except NoSuchElementException:
             return False

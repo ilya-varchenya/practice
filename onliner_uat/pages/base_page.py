@@ -1,16 +1,10 @@
-from onliner_uat.web_elements.time_class_constants import TimeOutConstants
 from onliner_uat.web_elements.web_helpers import WebHelpers
 
 
-class BasePage(WebHelpers):
+class BasePage:
     def __init__(self, driver):
         self.driver = driver
-
-    def scroll(self, val):
-        self.scroll(val)
-
-    def click(self, val, timeout=TimeOutConstants.BUTTON_TIMEOUT):
-        self.click(val, timeout)
+        self.helpers = WebHelpers
 
     def is_open(self):
         pass

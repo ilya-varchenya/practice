@@ -12,7 +12,7 @@ class WebLabel(WebBaseElement):
         """
         Get text from element
         """
-        return super().get_text()
+        return self.driver.find_element(self.by, self.value).text
 
     def get_text_from_amount_of_elements(self):
         """
@@ -25,7 +25,7 @@ class WebLabel(WebBaseElement):
         Get text from element as integer
         """
         try:
-            return int(self.driver.find_element(self.by, self.value).text)
+            return self.driver.get_text_as_int(self.by, self.value)
         except ValueError:
             return False
 
