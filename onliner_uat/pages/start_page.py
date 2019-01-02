@@ -2,7 +2,6 @@ from selenium.webdriver.common.by import By
 
 from onliner_uat.pages.base_page import BasePage
 from onliner_uat.web_elements.web_elements import WebLink, WebLabel
-from onliner_uat.web_elements.web_helpers import WebHelpers
 from onliner_uat.pages.news_page import NewsPage
 
 
@@ -54,13 +53,17 @@ class StartPage(BasePage):
         flag = True
 
         for i in list_of_text:
-            if int(i) < 40000:
+            # delete all spaces
+            if ' ' in i:
+                i = i.replace(" ", "")
+            # check is number more then 30k
+            if int(i) < 30000:
                 flag = False
             else:
                 flag = True
         return flag
 
     def go_to_people_page(self):
-        self.helpers.move_to_appear(self.news_tip, self.people_tip)
+        self.helpers.move_to_element(self, self.news_tip, self.people_tip)
         self.people_tip.click()
         return NewsPage(self.driver)

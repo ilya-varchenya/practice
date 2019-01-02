@@ -73,12 +73,12 @@ class TestStartPage(BaseTest):
 
         news_page = start.go_to_people_page()
         # is titles similar
-        assert news_page.is_titles_similar()
+        assert news_page.is_have_all_atr()
 
     @pytest.mark.ON6
     def test_the_most_viewed_news_should_be_highlighted_by_red(self):
         """
-        The most viewed news (40k+ views) should be highlighted by red on the views section
+        The most viewed news (30k+ views) should be highlighted by red on the views section
         """
         start = StartPage(self.driver)
 
