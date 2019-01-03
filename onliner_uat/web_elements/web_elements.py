@@ -1,5 +1,6 @@
-from onliner_uat.web_elements.web_base_elements import WebBaseElement
+from onliner_uat.web_elements.web_base_element import WebBaseElement
 from onliner_uat.web_elements.IClick import IClick
+from onliner_uat.web_elements.time_class_constants import TimeOutConstants
 
 
 class WebLabel(WebBaseElement):
@@ -30,18 +31,18 @@ class WebLabel(WebBaseElement):
             return False
 
 
-class WebButton(WebBaseElement, IClick):
+class WebButton(IClick):
     def __init__(self, by, value):
         self.by = by
         self.value = value
-        WebBaseElement.__init__(self, by, value)
+        IClick.__init__(self, by, value)
 
 
-class WebInput(WebBaseElement, IClick):
+class WebInput(IClick):
     def __init__(self, by, value):
         self.by = by
         self.value = value
-        WebBaseElement.__init__(self, by, value)
+        IClick.__init__(self, by, value)
 
     def clear(self):
         """
@@ -57,11 +58,11 @@ class WebInput(WebBaseElement, IClick):
         self.driver.find_element(self.by, self.value).send_keys(input_text)
 
 
-class WebRadioButton(WebBaseElement, IClick):
+class WebRadioButton(IClick):
     def __init__(self, by, value):
         self.by = by
         self.value = value
-        WebBaseElement.__init__(self, by, value)
+        IClick.__init__(self, by, value)
 
     def is_checked(self):
         """
@@ -70,11 +71,11 @@ class WebRadioButton(WebBaseElement, IClick):
         return self.driver.findElements(self.by, self.value).getAttribute("checked")
 
 
-class WebCheckBox(WebBaseElement, IClick):
+class WebCheckBox(IClick):
     def __init__(self, by, value):
         self.by = by
         self.value = value
-        WebBaseElement.__init__(self, by, value)
+        IClick.__init__(self, by, value)
 
     def is_checked(self):
         """
@@ -83,8 +84,8 @@ class WebCheckBox(WebBaseElement, IClick):
         return self.driver.findElements(self.by, self.value).getAttribute('selected')
 
 
-class WebLink(WebBaseElement, IClick):
+class WebLink(IClick):
     def __init__(self, by, value):
         self.by = by
         self.value = value
-        WebBaseElement.__init__(self, by, value)
+        IClick.__init__(self, by, value)

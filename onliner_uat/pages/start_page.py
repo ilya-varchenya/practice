@@ -29,7 +29,7 @@ class StartPage(BasePage):
         else:
             return False
 
-    def is_subsections_visible(self):
+    def are_subsections_have_correct_names(self):
         list_of_subsections = ("Люди", "Мнения", "Авто", "Технологии", "Недвижимость", "Форум")
         list_of_text = self.subsections_headers.get_text_from_amount_of_elements()
         flag = True

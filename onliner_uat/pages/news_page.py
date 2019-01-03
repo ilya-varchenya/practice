@@ -8,9 +8,11 @@ from onliner_uat.pages.certain_news_page import CertainNewsPage
 
 class NewsPage(BasePage):
     active_tab = WebLabel(By.XPATH, "//li[contains(@class, 'project-navigation__item_active')]")
-    predicted_text = 'люди'
+    predicted_text_of_label = 'люди'
 
-    first_news_title = WebLink(By.XPATH, "//div[@class = 'news-tidings__subtitle']")
+    first_news_link = WebLink(By.XPATH, "//a[@class = 'news-tidings__stub']")
+    first_news = WebLink(By.XPATH, "//a[@class = 'news-tidings__link']//span")
+    news_preview_title = WebLabel(By.XPATH, "//div[@class='news-tidings__subtitle']")
     title = WebLink(By.XPATH, "//div[@class = 'news-header__title']")
     news_elements = WebLink(By.XPATH, "//div[@class='news-tidings__item news-tidings__item_1of3 news-tidings__item_condensed']")
 
@@ -26,23 +28,12 @@ class NewsPage(BasePage):
 
     def is_bar_selected(self):
         text_of_active_tab = self.active_tab.get_text().lower()
+        return text_of_active_tab == self.predicted_text_of_label
 
-        if text_of_active_tab == self.predicted_text:
-            return True
-        else:
-            return False
+    def get_text_of_first_news(self):
+        return self.first_news.get_text().lower()
 
-    def is_titles_similar(self):
-        text_of_title_on_news_page = self.first_news_title.get_text().lower()
-        self.first_news_title.click()
-        text_of_title = self.title.get_text().lower()
-
-        if text_of_title_on_news_page == text_of_title:
-            return True
-        else:
-            return False
-
-    def is_have_all_atr(self):
+    def is_all_components_present(self):
         list_of_elements = self.news_elements.get_text_from_amount_of_elements()
 
         list_of_attributes = [
@@ -64,5 +55,6 @@ class NewsPage(BasePage):
         return flag
 
     def go_to_certain_news_page(self):
-        self.first_news_title.click()
+        self.first_news_link.click()
         return CertainNewsPage(self.driver)
+

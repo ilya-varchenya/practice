@@ -11,6 +11,7 @@ class CertainNewsPage(BasePage):
     comments_section = WebLink(By.XPATH, "//div[@id= 'comments']")
     more_comments_button = WebButton(By.XPATH, "//div[@class= 'news-form__control news-form__control_condensed']")
     amount_of_comments = WebLabel(By.XPATH, "//div[@class= 'news-form__title news-form__title_middle']")
+    news_title = WebLabel(By.XPATH, "//div[@class='news-header__title']")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -24,8 +25,8 @@ class CertainNewsPage(BasePage):
     def is_amount_of_comments_more_then_100(self):
         try:
             self.more_comments_button.click()
-            number = re.findall(r'\b\d+\b', self.amount_of_comments.get_text())
-            number = number[0]
+            number_list = re.findall(r'\b\d+\b', self.amount_of_comments.get_text())
+            number = int(number_list[0])
             if number > 100:
                 return True
             else:
@@ -39,3 +40,6 @@ class CertainNewsPage(BasePage):
             return True
         except NoSuchElementException:
             return False
+
+    def get_text_of_tittle(self):
+        return self.news_title.get_text().lower()
