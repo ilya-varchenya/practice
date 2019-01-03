@@ -33,7 +33,7 @@ class NewsPage(BasePage):
     def get_text_of_first_news(self):
         return self.first_news.get_text().lower()
 
-    def is_all_components_present(self):
+    def is_all_components_of_news_block_present(self):
         list_of_elements = self.news_elements.get_text_from_amount_of_elements()
 
         list_of_attributes = [

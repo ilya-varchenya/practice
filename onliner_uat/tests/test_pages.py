@@ -4,7 +4,7 @@ from onliner_uat.tests.base_test import BaseTest
 from onliner_uat.pages.start_page import StartPage
 
 
-class TestStartPage(BaseTest):
+class TestPages(BaseTest):
     url = "https://www.onliner.by/"
 
     def setup(self):
@@ -52,23 +52,27 @@ class TestStartPage(BaseTest):
 
         news_page = start.go_to_people_page()
         # is titles similar
-        assert news_page.is_all_components_present()
+        assert news_page.is_all_components_of_news_block_present()
 
     @pytest.mark.ON6
     def test_the_most_viewed_news_should_be_highlighted_by_red(self):
         start = StartPage(self.driver)
 
         # is highlighted by red color
-        assert start.is_red()
+        assert start.is_element_red()
 
     @pytest.mark.ON7
     def test_title_should_be_equal_with_title_on_preview(self):
         start = StartPage(self.driver)
 
+        # go to News page
         news_page = start.go_to_people_page()
+        # get title from preview
         text_of_preview_title = news_page.get_text_of_first_news()
 
+        # go to certain News page
         certain_news_page = news_page.go_to_certain_news_page()
+        # get title from certain News page
         text_of_title_on_certain_news_page = certain_news_page.get_text_of_tittle()
 
         # is titles similar
@@ -78,20 +82,22 @@ class TestStartPage(BaseTest):
     def test_comments_should_be_present_for_each_article(self):
         start = StartPage(self.driver)
 
+        # go to News page
         news_page = start.go_to_people_page()
+        # go to certain News page
         certain_news_page = news_page.go_to_certain_news_page()
 
         # is titles similar
         assert certain_news_page.is_comments_present()
 
         # does article have 100+ comments
-        assert certain_news_page.is_amount_of_comments_more_the
-        n_100()
+        assert certain_news_page.is_amount_of_comments_more_then_100()
 
     @pytest.mark.ON9
     def test_user_can_expand_the_list_of_comments(self):
         start = StartPage(self.driver)
 
+        # go to News page
         news_page = start.go_to_people_page()
         certain_news_page = news_page.go_to_certain_news_page()
 

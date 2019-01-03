@@ -84,7 +84,7 @@ class WebHelpers:
             el1 = self.driver.find_element(element.by, element.value)
             ActionChains(self.driver).move_to_element(el1).perform()
 
-            # wait for menu item to appear
+            # wait for item
             WebDriverWait(self.driver, TimeOutConstants.BUTTON_TIMEOUT).\
                 until(expected_conditions.presence_of_element_located((element_appear.by, element_appear.value)))
         except NoSuchElementException:

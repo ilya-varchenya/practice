@@ -17,10 +17,7 @@ class CertainNewsPage(BasePage):
         super().__init__(driver)
 
     def is_comments_present(self):
-        if self.comments_section.get_element():
-            return True
-        else:
-            return False
+        return self.comments_section.get_element()
 
     def is_amount_of_comments_more_then_100(self):
         try:
@@ -39,7 +36,7 @@ class CertainNewsPage(BasePage):
             self.more_comments_button.click()
             return True
         except NoSuchElementException:
-            return False
+            return None
 
     def get_text_of_tittle(self):
         return self.news_title.get_text().lower()

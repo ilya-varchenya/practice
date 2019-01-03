@@ -48,7 +48,7 @@ class StartPage(BasePage):
         else:
             return False
 
-    def is_red(self):
+    def is_element_red(self):
         list_of_text = self.ret_tip.get_text_from_amount_of_elements()
         flag = True
 
