@@ -76,17 +76,13 @@ class WebHelpers:
             return False
         return True
 
-    def move_to_element(self, element, element_appear):
+    def move_to_element(self, element):
         """
         Move to element
         """
         try:
             el1 = self.driver.find_element(element.by, element.value)
             ActionChains(self.driver).move_to_element(el1).perform()
-
-            # wait for item
-            WebDriverWait(self.driver, TimeOutConstants.BUTTON_TIMEOUT).\
-                until(expected_conditions.presence_of_element_located((element_appear.by, element_appear.value)))
         except NoSuchElementException:
             return False
         return True

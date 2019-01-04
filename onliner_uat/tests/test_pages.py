@@ -10,47 +10,41 @@ class TestPages(BaseTest):
     def setup(self):
         self.driver.set_window_size(1400, 1000)
         self.driver.get(self.url)
+        self.start = StartPage(self.driver)
 
     def teardown(self):
         self.driver.quit()
 
     @pytest.mark.ON1
     def test_guest_should_be_able_to_news(self):
-        start = StartPage(self.driver)
-
         # check start page
-        assert start.is_open()
+        assert self.start.is_open()
 
         # is news link able to guest user
-        assert start.is_news_able()
+        assert self.start.is_news_able()
 
     @pytest.mark.ON2
     def test_subsections_should_be_visible_on_main_page(self):
-        start = StartPage(self.driver)
-
         # is subsections visible
-        assert start.are_subsections_have_correct_names()
+        assert self.start.are_subsections_have_correct_names()
 
     @pytest.mark.ON3
     def test_tab_should_be_checked_while_user_navigates_to_subsections(self):
-        start = StartPage(self.driver)
-
         # is subsections underlined with CSS class
-        assert start.is_news_underlined()
+        assert self.start.is_news_underlined()
 
     @pytest.mark.ON4
     def test_when_user_clicks_subsection_tab_bar_should_be_visible_and_bar_should_be_selected(self):
-        start = StartPage(self.driver)
-        news_page = start.go_to_people_page()
+        # go to news page
+        news_page = self.start.go_to_people_page()
 
         # is "Люди" bar selected
         assert news_page.is_bar_selected()
 
     @pytest.mark.ON5
     def test_should_contain_following_info(self):
-        start = StartPage(self.driver)
-
-        news_page = start.go_to_people_page()
+        # go to news page
+        news_page = self.start.go_to_people_page()
         # is titles similar
         # assert news_page.is_all_components_of_news_block_present()
 
@@ -74,17 +68,13 @@ class TestPages(BaseTest):
 
     @pytest.mark.ON6
     def test_the_most_viewed_news_should_be_highlighted_by_red(self):
-        start = StartPage(self.driver)
-
         # is highlighted by red color
-        assert start.is_element_red()
+        assert self.start.is_element_red()
 
     @pytest.mark.ON7
     def test_title_should_be_equal_with_title_on_preview(self):
-        start = StartPage(self.driver)
-
         # go to News page
-        news_page = start.go_to_people_page()
+        news_page = self.start.go_to_people_page()
         # get title from preview
         text_of_preview_title = news_page.get_text_of_first_news()
 
@@ -98,10 +88,8 @@ class TestPages(BaseTest):
 
     @pytest.mark.ON8
     def test_comments_should_be_present_for_each_article(self):
-        start = StartPage(self.driver)
-
         # go to News page
-        news_page = start.go_to_people_page()
+        news_page = self.start.go_to_people_page()
         # go to certain News page
         certain_news_page = news_page.go_to_certain_news_page()
 
@@ -113,10 +101,8 @@ class TestPages(BaseTest):
 
     @pytest.mark.ON9
     def test_user_can_expand_the_list_of_comments(self):
-        start = StartPage(self.driver)
-
         # go to News page
-        news_page = start.go_to_people_page()
+        news_page = self.start.go_to_people_page()
         certain_news_page = news_page.go_to_certain_news_page()
 
         # does list of comments expand

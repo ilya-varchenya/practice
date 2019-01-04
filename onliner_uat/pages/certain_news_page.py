@@ -22,14 +22,13 @@ class CertainNewsPage(BasePage):
     def is_amount_of_comments_more_then_100(self):
         try:
             self.more_comments_button.click()
-            number_list = re.findall(r'\b\d+\b', self.amount_of_comments.get_text())
-            number = int(number_list[0])
-            if number > 100:
-                return True
-            else:
-                return False
         except NoSuchElementException:
             return False
+        finally:
+            number_list = re.findall(r'\b\d+\b', self.amount_of_comments.get_text())
+            number = int(number_list[0])
+            return number > 100
+
 
     def is_expand_the_list_of_comments(self):
         try:

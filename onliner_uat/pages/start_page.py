@@ -1,6 +1,9 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
 
 from onliner_uat.pages.base_page import BasePage
+from onliner_uat.web_elements.time_class_constants import TimeOutConstants
 from onliner_uat.web_elements.web_elements import WebLink, WebLabel
 from onliner_uat.pages.news_page import NewsPage
 
@@ -64,6 +67,9 @@ class StartPage(BasePage):
         return flag
 
     def go_to_people_page(self):
-        self.helpers.move_to_element(self, self.news_tip, self.people_tip)
+        self.helpers.move_to_element(self, self.news_tip)
+        # wait for item
+        WebDriverWait(self.driver, TimeOutConstants.BUTTON_TIMEOUT).\
+            until(expected_conditions.presence_of_element_located((self.people_tip.by, self.people_tip.value)))
         self.people_tip.click()
         return NewsPage(self.driver)
