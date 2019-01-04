@@ -47,12 +47,30 @@ class TestPages(BaseTest):
         assert news_page.is_bar_selected()
 
     @pytest.mark.ON5
-    def test_shoud_contain_following_info(self):
+    def test_should_contain_following_info(self):
         start = StartPage(self.driver)
 
         news_page = start.go_to_people_page()
         # is titles similar
-        assert news_page.is_all_components_of_news_block_present()
+        # assert news_page.is_all_components_of_news_block_present()
+
+        # is title present on news block
+        assert news_page.is_news_block_tittle_present()
+
+        # is text preview present on news block
+        assert news_page.is_news_block_text_preview_present()
+
+        # is image present on news block
+        assert news_page.is_news_block_image_present()
+
+        # is number of views present on news block
+        assert news_page.is_news_block_number_of_views_present()
+
+        # is number of comments present on news block
+        assert news_page.is_news_block_number_of_comments_present()
+
+        # is publishing date present on news block
+        assert news_page.is_news_block_publishing_date_present()
 
     @pytest.mark.ON6
     def test_the_most_viewed_news_should_be_highlighted_by_red(self):

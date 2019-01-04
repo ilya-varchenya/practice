@@ -54,6 +54,78 @@ class NewsPage(BasePage):
                     flag = False
         return flag
 
+    def is_news_block_tittle_present(self):
+        list_of_elements = self.news_elements.get_text_from_amount_of_elements()
+
+        flag = True
+
+        for i in list_of_elements:
+            try:
+                i.find_element(self.news_title)
+            except NoSuchElementException:
+                flag = False
+        return flag
+
+    def is_news_block_text_preview_present(self):
+        list_of_elements = self.news_elements.get_text_from_amount_of_elements()
+
+        flag = True
+
+        for i in list_of_elements:
+            try:
+                i.find_element(self.news_text_preview)
+            except NoSuchElementException:
+                flag = False
+        return flag
+
+    def is_news_block_image_present(self):
+        list_of_elements = self.news_elements.get_text_from_amount_of_elements()
+
+        flag = True
+
+        for i in list_of_elements:
+            try:
+                i.find_element(self.news_image)
+            except NoSuchElementException:
+                flag = False
+        return flag
+
+    def is_news_block_number_of_views_present(self):
+        list_of_elements = self.news_elements.get_text_from_amount_of_elements()
+
+        flag = True
+
+        for i in list_of_elements:
+            try:
+                i.find_element(self.news_number_of_views)
+            except NoSuchElementException:
+                flag = False
+        return flag
+
+    def is_news_block_number_of_comments_present(self):
+        list_of_elements = self.news_elements.get_text_from_amount_of_elements()
+
+        flag = True
+
+        for i in list_of_elements:
+            try:
+                i.find_element(self.news_number_of_comments)
+            except NoSuchElementException:
+                flag = False
+        return flag
+
+    def is_news_block_publishing_date_present(self):
+        list_of_elements = self.news_elements.get_text_from_amount_of_elements()
+
+        flag = True
+
+        for i in list_of_elements:
+            try:
+                i.find_element(self.news_publishing_date)
+            except NoSuchElementException:
+                flag = False
+        return flag
+
     def go_to_certain_news_page(self):
         self.first_news_link.click()
         return CertainNewsPage(self.driver)
