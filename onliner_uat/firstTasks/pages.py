@@ -3,7 +3,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
 
-from seleniumWebElements.time_class_constants import TimeOutConstants
+from onliner_uat.web_elements.time_class_constants import TimeOutConstants
 
 
 class BasePage:
