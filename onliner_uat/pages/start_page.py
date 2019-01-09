@@ -21,10 +21,7 @@ class StartPage(BasePage):
         super().__init__(driver)
 
     def is_open(self):
-        if self.people.get_element():
-            return True
-        else:
-            return False
+        return self.people.get_element()
 
     def is_news_able(self):
         if self.news_tip.is_clickable():
@@ -45,7 +42,7 @@ class StartPage(BasePage):
         return flag
 
     def is_news_underlined(self):
-        self.helpers.move_to_appear(self, self.news_tip, self.news_tip_active)
+        self.helpers.move_to_element(self, self.news_tip)
         if self.news_tip_active.get():
             return True
         else:

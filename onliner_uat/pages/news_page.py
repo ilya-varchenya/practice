@@ -26,9 +26,9 @@ class NewsPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    def is_bar_selected(self):
+    def is_bar_selected(self, item):
         text_of_active_tab = self.active_tab.get_text().lower()
-        return text_of_active_tab == self.predicted_text_of_label
+        return text_of_active_tab == item.value
 
     def get_text_of_first_news(self):
         return self.first_news.get_text().lower()

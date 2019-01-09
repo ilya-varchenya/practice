@@ -2,10 +2,6 @@ from time import sleep
 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import ActionChains
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
-
-from onliner_uat.web_elements.time_class_constants import TimeOutConstants
 
 
 class WebHelpers:
@@ -86,3 +82,6 @@ class WebHelpers:
         except NoSuchElementException:
             return False
         return True
+
+    def back_to_previous(self):
+        self.driver.execute_script("window.history.go(-1)")

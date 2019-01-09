@@ -69,6 +69,17 @@ class WebBaseElement:
         """
         return self.driver.find_element(self.by, self.value).get_attribute(key)
 
+    def get_attribute_from_amount_of_elements(self, key):
+        """
+        Get attributes from amount of elements
+        """
+        l_of_attr_val = []
+        els = self.driver.find_elements(self.by, self.value)
+        for i in range(len(els)):
+            el = els[0].find_elements(self.by, self.value)[i].get_attribute(key)
+            l_of_attr_val.append(el)
+        return l_of_attr_val
+
     def with_text(self, text):
         self.value = self.value.format(text)
         return self
