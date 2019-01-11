@@ -10,10 +10,8 @@ class CatalogPage(BasePage):
     catalog_bar_tip = WebLink(By.XPATH, "//span[@class = 'catalog-navigation-classifier__item-title']")
     catalog_subcategories = WebLabel(By.XPATH, "//div[@class = 'catalog-navigation-list__category']")
     catalog_subcategories_tip = WebButton(By.XPATH, "//div[@class = 'catalog-navigation-list__aside-item']")
-    first_catalog_subcategories_right_tip = \
-        WebLink(By.CSS_SELECTOR, "div[class = 'catalog-navigation-list__beside']")
-    second_catalog_subcategories_right_tip = \
-        WebLink(By.CSS_SELECTOR, "div[class = 'catalog-navigation-list__beside'][style = 'display: none;']")
+    first_catalog_subcategories_right_tip = WebLink(By.CSS_SELECTOR, "div[class = 'catalog-navigation-list__beside']")
+    second_catalog_subcategories_right_tip = WebLink(By.CSS_SELECTOR, "div[class = 'catalog-navigation-list__beside'][style = 'display: none;']")
 
     def __init__(self, driver):
         super().__init__(driver)

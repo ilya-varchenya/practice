@@ -45,10 +45,7 @@ class StartPage(BasePage):
 
     def is_news_underlined(self):
         self.helpers.move_to_element(self, self.news_tip)
-        if self.news_tip_active.get():
-            return True
-        else:
-            return False
+        return self.news_tip_active.get()
 
     def is_element_red(self):
         list_of_text = self.ret_tip.get_text_from_amount_of_elements()

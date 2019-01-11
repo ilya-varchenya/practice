@@ -1,4 +1,4 @@
-from onliner_uat.firstTasks.pages import StartPage
+from onliner_uat.TrySeleniumTasks.pages import StartPage
 from selenium import webdriver
 
 

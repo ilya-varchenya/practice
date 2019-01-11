@@ -32,19 +32,13 @@ class WebBaseElement:
         """
         Check is element present
         """
-        if self.driver.find_element(self.by, self.value):
-            return True
-        else:
-            return False
+        return self.driver.find_element(self.by, self.value)
 
     def is_not_present(self):
         """
         Check is element not present
         """
-        if not(self.driver.find_element(self.by, self.value)):
-            return True
-        else:
-            return False
+        return not(self.driver.find_element(self.by, self.value))
 
     def get_text(self):
         """
@@ -55,6 +49,8 @@ class WebBaseElement:
     def get_text_from_amount_of_elements(self):
         """
         Get text from amount of elements
+        :param key: attribute name
+        :return: list of elements texts
         """
         l_of_text = []
         els = self.driver.find_elements(self.by, self.value)
@@ -66,12 +62,16 @@ class WebBaseElement:
     def get_attribute(self, key):
         """
         Get attribute parameter
+        :param key: attribute name
+        :return: attribute value
         """
         return self.driver.find_element(self.by, self.value).get_attribute(key)
 
     def get_attribute_from_amount_of_elements(self, key):
         """
         Get attributes from amount of elements
+        :param key: attribute name
+        :return: list of attributes
         """
         l_of_attr_val = []
         els = self.driver.find_elements(self.by, self.value)

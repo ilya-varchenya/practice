@@ -11,18 +11,14 @@ class WebLabel(WebBaseElement):
     def get_text(self):
         """
         Get text from element
+        :return: text of element
         """
         return self.driver.find_element(self.by, self.value).text
-
-    def get_text_from_amount_of_elements(self):
-        """
-        Get text from amount of elements
-        """
-        return super().get_text_from_amount_of_elements()
 
     def get_text_as_int(self):
         """
         Get text from element as integer
+        :return: integer value
         """
         try:
             return self.driver.get_text_as_int(self.by, self.value)
@@ -52,6 +48,7 @@ class WebInput(IClick):
     def set_text(self, input_text):
         """
         Clear input text fields and type text there
+        :param input_text:
         """
         self.clear()
         self.driver.find_element(self.by, self.value).send_keys(input_text)
@@ -105,5 +102,6 @@ class WebElementList(WebBaseElement):
     def get_attribute_from_amount_of_elements(self, key):
         """
         Get get attribute from amount of elements
+        :param key: attribute name
         """
         return super().get_attribute_from_amount_of_elements(key)
