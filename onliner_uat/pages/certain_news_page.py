@@ -5,15 +5,8 @@ from selenium.webdriver.common.by import By
 
 from onliner_uat.pages.base_page import BasePage
 from onliner_uat.web_elements.web_elements import WebLink, WebButton, WebLabel
-
-from onliner_uat.pages.onliner_social_profiles.youtube_page import YouTubePage
-from onliner_uat.pages.onliner_social_profiles.instagram_page import InstagramPage
-from onliner_uat.pages.onliner_social_profiles.twitter_page import TwitterPage
-from onliner_uat.pages.onliner_social_profiles.ok_page import OKPage
-from onliner_uat.pages.onliner_social_profiles.facebook_page import FacebookPage
-from onliner_uat.pages.onliner_social_profiles.vk_page import VKPage
-from onliner_uat.pages.onliner_social_profiles.connect_with_redaction_page import ConnectWithRedactionPage
-from onliner_uat.pages.onliner_social_profiles.rss_page import RSSPage
+from onliner_uat.pages.onliner_social_profiles import (YouTubePage, InstagramPage, TwitterPage, OKPage,
+                                                       FacebookPage, VKPage, ConnectWithRedactionPage, RSSPage)
 
 class CertainNewsPage(BasePage):
     comments_section = WebLink(By.XPATH, "//div[@id= 'comments']")

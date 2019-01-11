@@ -1,6 +1,5 @@
 from onliner_uat.web_elements.web_base_element import WebBaseElement
 from onliner_uat.web_elements.IClick import IClick
-from onliner_uat.web_elements.time_class_constants import TimeOutConstants
 
 
 class WebLabel(WebBaseElement):
@@ -89,3 +88,22 @@ class WebLink(IClick):
         self.by = by
         self.value = value
         IClick.__init__(self, by, value)
+
+
+class WebElementList(WebBaseElement):
+    def __init__(self, by, value):
+        self.by = by
+        self.value = value
+        WebBaseElement.__init__(self, by, value)
+
+    def get_text_from_amount_of_elements(self):
+        """
+        Get text from amount of elements
+        """
+        return super().get_text_from_amount_of_elements()
+
+    def get_attribute_from_amount_of_elements(self, key):
+        """
+        Get get attribute from amount of elements
+        """
+        return super().get_attribute_from_amount_of_elements(key)

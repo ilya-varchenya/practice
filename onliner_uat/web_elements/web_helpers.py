@@ -84,4 +84,4 @@ class WebHelpers:
         return True
 
     def go_back(self):
-        self.driver.execute_script("window.history.go(-1)")
+        self.driver.back()
