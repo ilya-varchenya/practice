@@ -25,7 +25,7 @@ class TestNewsPages(BaseTest):
 
     @pytest.mark.ON2
     def test_subsections_should_be_visible_on_main_page(self):
-        assert self.start.are_subsections_have_correct_names()
+        assert self.start.are_subsections_have_correct_names(BarItems)
 
     @pytest.mark.ON3
     def test_tab_should_be_checked_while_user_navigates_to_subsections(self):
