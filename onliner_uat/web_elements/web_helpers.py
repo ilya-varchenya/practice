@@ -2,10 +2,6 @@ from time import sleep
 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import ActionChains
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
-
-from onliner_uat.web_elements.time_class_constants import TimeOutConstants
 
 
 class WebHelpers:
@@ -15,6 +11,8 @@ class WebHelpers:
     def scroll(self, element):
         """
         Scroll page to element
+        :param element: web-element
+        :return: boolean
         """
         try:
             actions = ActionChains(self.driver)
@@ -28,12 +26,17 @@ class WebHelpers:
     def pause(timeout=1):
         """
         Pause break for given seconds
+        :param timeout:
+        :return: boolean
         """
         sleep(timeout)
 
     def drag_and_drop(self, from_el, to_el):
         """
         Take element, drag it to another
+        :param from_el: from this element will start drag
+        :param to_el: to this element will drag
+        :return: boolean
         """
         try:
             source_el = self.driver.find_element(from_el)
@@ -46,6 +49,8 @@ class WebHelpers:
     def double_click(self, element):
         """
         Double click on element
+        :param element:  web-element
+        :return: boolean
         """
         try:
             el = self.driver.find_element(element.by, element.value)
@@ -57,6 +62,8 @@ class WebHelpers:
     def right_click(self, element):
         """
         Click on element with right mouse button
+        :param element:  web-element
+        :return: boolean
         """
         try:
             el = self.driver.find_element(element.by, element.value)
@@ -68,6 +75,8 @@ class WebHelpers:
     def long_click(self, element):
         """
         Long click on element
+        :param element:  web-element
+        :return: boolean
         """
         try:
             el = self.driver.find_element(element.by, element.value)
@@ -79,6 +88,8 @@ class WebHelpers:
     def move_to_element(self, element):
         """
         Move to element
+        :param element:  web-element
+        :return: boolean
         """
         try:
             el1 = self.driver.find_element(element.by, element.value)
@@ -86,3 +97,6 @@ class WebHelpers:
         except NoSuchElementException:
             return False
         return True
+
+    def go_back(self):
+        self.driver.back()

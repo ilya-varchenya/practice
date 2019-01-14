@@ -32,19 +32,13 @@ class WebBaseElement:
         """
         Check is element present
         """
-        if self.driver.find_element(self.by, self.value):
-            return True
-        else:
-            return False
+        return self.driver.find_element(self.by, self.value)
 
     def is_not_present(self):
         """
         Check is element not present
         """
-        if not(self.driver.find_element(self.by, self.value)):
-            return True
-        else:
-            return False
+        return not(self.driver.find_element(self.by, self.value))
 
     def get_text(self):
         """
@@ -56,18 +50,29 @@ class WebBaseElement:
         """
         Get text from amount of elements
         """
-        l_of_text = []
         els = self.driver.find_elements(self.by, self.value)
-        for i in range(len(els)):
-            el = els[i].text.lower()
-            l_of_text.append(el)
-        return l_of_text
+        return [i.lower() for i in els]
 
     def get_attribute(self, key):
         """
         Get attribute parameter
+                :param key: attribute name
+        :return: attribute value
         """
         return self.driver.find_element(self.by, self.value).get_attribute(key)
+
+    def get_attribute_from_amount_of_elements(self, key):
+        """
+        Get attributes from amount of elements
+        :param key: attribute name
+        :return: list of attributes
+        """
+        l_of_attr_val = []
+        els = self.driver.find_elements(self.by, self.value)
+        for i in range(len(els)):
+            el = els[0].find_elements(self.by, self.value)[i].get_attribute(key)
+            l_of_attr_val.append(el)
+        return l_of_attr_val
 
     def with_text(self, text):
         self.value = self.value.format(text)

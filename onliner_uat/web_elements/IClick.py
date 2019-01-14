@@ -19,6 +19,8 @@ class IClick(WebBaseElement):
     def is_clickable(self, timeout=TimeOutConstants.BUTTON_TIMEOUT):
         """
         Check is element clickable
+        :param timeout: time of waiting for load element
+        :return: boolean
         """
         try:
             WebDriverWait(self.driver, timeout).until(expected_conditions.element_to_be_clickable((self.by, self.value)))
@@ -29,6 +31,8 @@ class IClick(WebBaseElement):
     def click(self, timeout=TimeOutConstants.BUTTON_TIMEOUT):
         """
         Click on element
+        :param timeout: time of waiting for load element
+        :return: boolean
         """
         try:
             WebDriverWait(self.driver, timeout).until(expected_conditions.presence_of_element_located((self.by, self.value)))
