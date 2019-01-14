@@ -49,15 +49,10 @@ class WebBaseElement:
     def get_text_from_amount_of_elements(self):
         """
         Get text from amount of elements
-        :param key: attribute name
         :return: list of elements texts
         """
-        l_of_text = []
         els = self.driver.find_elements(self.by, self.value)
-        for i in range(len(els)):
-            el = els[i].text.lower()
-            l_of_text.append(el)
-        return l_of_text
+        return [i.lower() for i in els]
 
     def get_attribute(self, key):
         """
