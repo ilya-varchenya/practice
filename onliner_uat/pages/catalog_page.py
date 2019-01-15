@@ -1,8 +1,9 @@
 from selenium.webdriver.common.by import By
 
 from onliner_uat.pages.base_page import BasePage
-from onliner_uat.web_elements.web_elements import WebLink, WebLabel, WebButton
 from onliner_uat.pages.cart_page import CartPage
+from onliner_uat.pages.catalog_certain_group_page import CertainCatalogGroupPage
+from onliner_uat.web_elements.web_elements import WebLink, WebLabel, WebButton
 
 
 class CatalogPage(BasePage):
@@ -10,8 +11,9 @@ class CatalogPage(BasePage):
     catalog_bar_tip = WebLink(By.XPATH, "//span[@class = 'catalog-navigation-classifier__item-title']")
     catalog_subcategories = WebLabel(By.XPATH, "//div[@class = 'catalog-navigation-list__category']")
     catalog_subcategories_tip = WebButton(By.XPATH, "//div[@class = 'catalog-navigation-list__aside-item']")
-    first_catalog_subcategories_right_tip = WebLink(By.CSS_SELECTOR, "div[class = 'catalog-navigation-list__beside']")
-    second_catalog_subcategories_right_tip = WebLink(By.CSS_SELECTOR, "div[class = 'catalog-navigation-list__beside'][style = 'display: none;']")
+    first_catalog_subcategories_right_tip = WebLink(By.CSS_SELECTOR, "//a[@class = 'catalog-navigation-list__dropdown-item']")
+    second_catalog_subcategories_right_tip = WebLink(By.CSS_SELECTOR, "//div[@class = 'catalog-navigation-list__beside'][style = 'display: none;']")
+    certain_subcategories_right_tip = WebLink(By.XPATH, "//a[@class = 'catalog-navigation-list__dropdown-item']")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -23,8 +25,7 @@ class CatalogPage(BasePage):
     def is_catalog_subtitles_visible(self, bar_items):
         list_of_elements_text = self.catalog_bar_tip.get_text_from_amount_of_elements()
         list_of_bar_items = [bar_item.value for bar_item in bar_items]
-        similarity = [bar_item == element for bar_item in list_of_bar_items for element in list_of_elements_text]
-        return any(similarity)
+        return list_of_elements_text == list_of_bar_items
 
     def is_catalog_subcategories_visible(self):
         self.helpers.move_to_element(self, self.catalog_bar_tip)
@@ -35,3 +36,14 @@ class CatalogPage(BasePage):
         if self.first_catalog_subcategories_right_tip.is_present():
             self.catalog_subcategories_tip.click()
         return self.second_catalog_subcategories_right_tip
+
+    def is_navigate_to_concrete_catalog_item(self):
+        self.catalog_bar_tip.click()
+        self.catalog_subcategories_tip.click()
+        return self.certain_subcategories_right_tip.is_present()
+
+    def go_to_certain_catalog_group(self):
+        self.catalog_bar_tip.click()
+        self.catalog_subcategories_tip.click()
+        self.certain_subcategories_right_tip.click()
+        return CertainCatalogGroupPage(self.driver)

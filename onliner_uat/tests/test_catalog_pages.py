@@ -40,3 +40,28 @@ class TestCatalogPages(BaseTest):
         catalog_page = self.start.go_to_catalog_page()
 
         assert catalog_page.is_catalog_subcategories_list_changed()
+
+    @pytest.mark.OC5
+    def test_user_can_navigate_to_concrete_catalog_item(self):
+        catalog_page = self.start.go_to_catalog_page()
+
+        assert catalog_page.is_navigate_to_concrete_catalog_item()
+
+    @pytest.mark.OC6
+    def test_user_should_be_able_to_apply_some_filters_on_item_list(self):
+        catalog_page = self.start.go_to_catalog_page()
+        certain_catalog_group_page = catalog_page.go_to_certain_catalog_group()
+
+        assert certain_catalog_group_page.is_filter_response()
+
+    @pytest.mark.OC7
+    def test_info_in_item_preview_should_be_the_same_with_info_under_title_of_item_page(self):
+        catalog_page = self.start.go_to_catalog_page()
+        certain_catalog_group_page = catalog_page.go_to_certain_catalog_group()
+
+        text_of_preview = certain_catalog_group_page.get_text_of_preview()
+
+        certain_catalog_item_page = certain_catalog_group_page.go_to_certain_catalog_group()
+
+        text_of_description = certain_catalog_item_page.get_text_from_description()
+        assert text_of_preview == text_of_description

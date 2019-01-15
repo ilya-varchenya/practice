@@ -51,7 +51,7 @@ class WebBaseElement:
         Get text from amount of elements
         """
         els = self.driver.find_elements(self.by, self.value)
-        return [i.lower() for i in els]
+        return [i.text for i in els]
 
     def get_attribute(self, key):
         """
