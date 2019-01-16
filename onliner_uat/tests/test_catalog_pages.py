@@ -65,3 +65,19 @@ class TestCatalogPages(BaseTest):
 
         text_of_description = certain_catalog_item_page.get_text_from_description()
         assert text_of_preview == text_of_description
+
+    @pytest.mark.OC8
+    def test_user_can_check_item_tips_for_add_items_to_comparison_list(self):
+        catalog_page = self.start.go_to_catalog_page()
+        certain_catalog_group_page = catalog_page.go_to_certain_catalog_group()
+
+        assert certain_catalog_group_page.is_three_first_items_checked()
+
+    @pytest.mark.OC9
+    def test_best_choice_option_should_be_highlighted(self):
+        catalog_page = self.start.go_to_catalog_page()
+        certain_catalog_group_page = catalog_page.go_to_certain_catalog_group()
+
+        catalog_comparison_page = certain_catalog_group_page.go_to_comparison_page()
+
+        assert catalog_comparison_page.is_the_best_of_first_15_sections_highlighted()

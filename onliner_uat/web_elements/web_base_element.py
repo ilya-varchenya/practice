@@ -3,7 +3,6 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 from onliner_uat.web_elements.time_class_constants import TimeOutConstants
-from onliner_uat.web_elements.web_helpers import WebHelpers
 
 
 class WebBaseElement:

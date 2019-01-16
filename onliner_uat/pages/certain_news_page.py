@@ -8,6 +8,7 @@ from onliner_uat.web_elements.web_elements import WebLink, WebButton, WebLabel
 from onliner_uat.pages.onliner_social_profiles import (YouTubePage, InstagramPage, TwitterPage, OKPage,
                                                        FacebookPage, VKPage, ConnectWithRedactionPage, RSSPage)
 
+
 class CertainNewsPage(BasePage):
     comments_section = WebLink(By.XPATH, "//div[@id= 'comments']")
     more_comments_button = WebButton(By.XPATH, "//div[@class= 'news-form__control news-form__control_condensed']")
@@ -45,7 +46,6 @@ class CertainNewsPage(BasePage):
             number_list = re.findall(r'\b\d+\b', self.amount_of_comments.get_text())
             number = int(number_list[0])
             return number > 100
-
 
     def is_expand_the_list_of_comments(self):
         try:
