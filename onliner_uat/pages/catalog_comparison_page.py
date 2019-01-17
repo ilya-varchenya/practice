@@ -13,14 +13,14 @@ class CatalogComparisonPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    def is_the_best_of_first_15_sections_highlighted(self):
+    def is_the_best_of_first_sections_highlighted(self):
         # get list of class-attribute values and text values OF ALL sells
         list_of_class_values = self.comparison_column.get_attribute('class')
         list_of_text = self.comparison_column.get_text_from_amount_of_elements()
 
         list_of_4_items_class_values = []
         list_of_4_items_text = []
-        flag = True
+        is_highlighted = True
 
         for i in range(len(list_of_class_values)):
             # get four items from lists
@@ -38,5 +38,5 @@ class CatalogComparisonPage(BasePage):
                         position = item
 
                 if "product-table__cell_accent" not in list_of_class_values[position]:
-                    flag = False
-        return flag
+                    is_highlighted = False
+        return is_highlighted

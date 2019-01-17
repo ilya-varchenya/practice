@@ -15,7 +15,6 @@ class WebLabel(WebBaseElement):
 
     def get_text(self):
         """
-        Get text from element
         :return: text of element
         """
         return self.driver.find_element(self.by, self.value).text
@@ -66,9 +65,6 @@ class WebRadioButton(IClick):
         IClick.__init__(self, by, value)
 
     def is_checked(self):
-        """
-        Check is element checked
-        """
         return self.driver.findElements(self.by, self.value).getAttribute("checked")
 
 
@@ -79,9 +75,6 @@ class WebCheckBox(IClick):
         IClick.__init__(self, by, value)
 
     def is_checked(self):
-        """
-        Check is element checked
-        """
         return self.driver.findElements(self.by, self.value).getAttribute('selected')
 
 
@@ -92,15 +85,16 @@ class WebLink(IClick):
         IClick.__init__(self, by, value)
 
 
-class WebElementList(IClick):
+class WebElementList(WebBaseElement):
     def __init__(self, by, value):
         self.by = by
         self.value = value
-        IClick.__init__(self, by, value)
+        WebBaseElement.__init__(self, by, value)
 
     def get_elements(self, timeout=TimeOutConstants.PAGE_LOAD_TIMEOUT):
         """
-        Get element from page
+        :param timeout: timeout of waiting time
+        :return: list of elements
         """
         try:
             elements = WebDriverWait(self.driver, timeout).until(expected_conditions.presence_of_all_elements_located((self.by, self.value)))
@@ -113,13 +107,19 @@ class WebElementList(IClick):
 
     def get_text_from_amount_of_elements(self):
         """
-        Get text from amount of elements
+        :return:list of elements texts
         """
-        return super().get_text_from_amount_of_elements()
+        els = self.driver.find_elements(self.by, self.value)
+        return [i.text for i in els]
 
     def get_attribute_from_amount_of_elements(self, key):
         """
-        Get get attribute from amount of elements
         :param key: attribute name
+        :return: list of attributes
         """
-        return super().get_attribute_from_amount_of_elements(key)
+        l_of_attr_val = []
+        els = self.driver.find_elements(self.by, self.value)
+        for i in range(len(els)):
+            el = els[0].find_elements(self.by, self.value)[i].get_attribute(key)
+            l_of_attr_val.append(el)
+        return l_of_attr_val

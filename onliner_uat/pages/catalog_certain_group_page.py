@@ -27,19 +27,19 @@ class CertainCatalogGroupPage(BasePage):
         self.title_of_item.click()
         return CatalogCertainItemPage(self.driver)
 
-    def is_three_first_items_checked(self):
+    def is_first_in_column_items_checked(self, number_of_checked_items=3):
         list_of_checked = []
 
         list_of_elements = self.choice_check_boxes.get_elements()
-        counter = 3
+        counter = number_of_checked_items
         for i in list_of_elements:
             list_of_checked.append(i.click())
             counter -= 1
             if counter == 0:
                 break
-        return len(list_of_checked) == 3
+        return len(list_of_checked) == number_of_checked_items
 
     def go_to_comparison_page(self):
-        self.is_three_first_items_checked()
+        self.is_first_in_column_items_checked()
         self.comparison_tip.click()
         return CatalogComparisonPage(self.driver)

@@ -18,6 +18,9 @@ class CatalogPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
+    def is_concrete_catalog_item_open(self):
+        return self.certain_subcategories_right_tip.is_present()
+
     def go_to_cart_page(self):
         self.cart_link.click()
         return CartPage(self.driver)
@@ -40,7 +43,7 @@ class CatalogPage(BasePage):
     def is_navigate_to_concrete_catalog_item(self):
         self.catalog_bar_tip.click()
         self.catalog_subcategories_tip.click()
-        return self.certain_subcategories_right_tip.is_present()
+        return self.is_concrete_catalog_item_open()
 
     def go_to_certain_catalog_group(self):
         self.catalog_bar_tip.click()
