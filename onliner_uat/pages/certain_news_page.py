@@ -1,5 +1,3 @@
-import re
-
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
@@ -7,6 +5,7 @@ from onliner_uat.pages.base_page import BasePage
 from onliner_uat.web_elements.web_elements import WebLink, WebButton, WebLabel
 from onliner_uat.pages.onliner_social_profiles import (YouTubePage, InstagramPage, TwitterPage, OKPage,
                                                        FacebookPage, VKPage, ConnectWithRedactionPage, RSSPage)
+from onliner_uat.utils.regular_expressions_service import get_number_from_string
 
 
 class CertainNewsPage(BasePage):
@@ -43,7 +42,7 @@ class CertainNewsPage(BasePage):
         except NoSuchElementException:
             return False
         finally:
-            number_list = re.findall(r'\b\d+\b', self.amount_of_comments.get_text())
+            number_list = get_number_from_string(self.amount_of_comments.get_text())
             number = int(number_list[0])
             return number > 100
 

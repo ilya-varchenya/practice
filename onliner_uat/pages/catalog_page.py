@@ -10,7 +10,7 @@ class CatalogPage(BasePage):
     cart_link = WebLink(By.XPATH, "//a[@class = 'b-top-navigation-cart__link']")
     catalog_bar_tip = WebLink(By.XPATH, "//span[@class = 'catalog-navigation-classifier__item-title']")
     catalog_subcategories = WebLabel(By.XPATH, "//div[@class = 'catalog-navigation-list__category']")
-    catalog_subcategories_tip = WebButton(By.XPATH, "//div[@class = 'catalog-navigation-list__aside-item']")
+    catalog_subcategories_tip = WebLink(By.XPATH, "//div[@class = 'catalog-navigation-list__aside-title' and contains(normalize-space(text()), '{}')]")
     first_catalog_subcategories_right_tip = WebLink(By.CSS_SELECTOR, "//a[@class = 'catalog-navigation-list__dropdown-item']")
     second_catalog_subcategories_right_tip = WebLink(By.CSS_SELECTOR, "//div[@class = 'catalog-navigation-list__beside'][style = 'display: none;']")
     certain_subcategories_right_tip = WebLink(By.XPATH, "//a[@class = 'catalog-navigation-list__dropdown-item']")
@@ -45,8 +45,8 @@ class CatalogPage(BasePage):
         self.catalog_subcategories_tip.click()
         return self.is_concrete_catalog_item_open()
 
-    def go_to_certain_catalog_group(self):
+    def go_to_certain_catalog_group(self, name_of_tip):
         self.catalog_bar_tip.click()
-        self.catalog_subcategories_tip.click()
+        self.catalog_subcategories_tip.with_text(name_of_tip).click()
         self.certain_subcategories_right_tip.click()
         return CertainCatalogGroupPage(self.driver)

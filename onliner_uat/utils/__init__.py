@@ -1,0 +1,1 @@
+from .regular_expressions_service import get_number_from_string

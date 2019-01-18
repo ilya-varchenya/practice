@@ -53,6 +53,6 @@ class WebBaseElement:
         """
         return self.driver.find_element(self.by, self.value).get_attribute(key)
 
-    def with_text(self, text):
+    def with_text(self, text=''):
         self.value = self.value.format(text)
         return self

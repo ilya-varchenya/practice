@@ -36,7 +36,7 @@ class TestCatalogPages(BaseTest):
         assert catalog_page.is_catalog_subcategories_visible()
 
     @pytest.mark.OC4
-    def test_list_of_items_in_subcategories_list_shold_be_changed_when_user_click(self):
+    def test_list_of_items_in_subcategories_list_should_be_changed_when_user_click(self):
         catalog_page = self.start.go_to_catalog_page()
 
         assert catalog_page.is_catalog_subcategories_list_changed()
@@ -50,7 +50,7 @@ class TestCatalogPages(BaseTest):
     @pytest.mark.OC6
     def test_user_should_be_able_to_apply_some_filters_on_item_list(self):
         catalog_page = self.start.go_to_catalog_page()
-        certain_catalog_group_page = catalog_page.go_to_certain_catalog_group()
+        certain_catalog_group_page = catalog_page.go_to_certain_catalog_group('Мобильные телефоны')
 
         assert certain_catalog_group_page.is_filter_response()
 
