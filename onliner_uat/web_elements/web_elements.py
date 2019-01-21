@@ -1,3 +1,5 @@
+import logging
+
 from onliner_uat.web_elements.web_base_element import WebBaseElement
 from onliner_uat.web_elements.IClick import IClick
 
@@ -13,6 +15,8 @@ class WebLabel(WebBaseElement):
         Get text from element
         :return: text of element
         """
+        logging.getLogger(__name__).info(
+            "Text of element: {}".format(self.driver.find_element(self.by, self.value).text))
         return self.driver.find_element(self.by, self.value).text
 
     def get_text_as_int(self):
@@ -21,6 +25,8 @@ class WebLabel(WebBaseElement):
         :return: integer value
         """
         try:
+            logging.getLogger(__name__).info(
+                "Text of element as integer: {}".format(self.driver.get_text_as_int(self.by, self.value)))
             return self.driver.get_text_as_int(self.by, self.value)
         except ValueError:
             return False
@@ -51,6 +57,7 @@ class WebInput(IClick):
         :param input_text:
         """
         self.clear()
+        logging.getLogger(__name__).info("This text set to input field: {}".format(input_text))
         self.driver.find_element(self.by, self.value).send_keys(input_text)
 
 
@@ -97,11 +104,15 @@ class WebElementList(WebBaseElement):
         """
         Get text from amount of elements
         """
+        logging.getLogger(__name__).info(
+            "Text from amount of elements: {}".format(super().get_text_from_amount_of_elements()))
         return super().get_text_from_amount_of_elements()
 
-    def get_attribute_from_amount_of_elements(self, key):
+    def get_attributes_from_amount_of_elements(self, key):
         """
-        Get get attribute from amount of elements
+        Get get attributes from amount of elements
         :param key: attribute name
         """
-        return super().get_attribute_from_amount_of_elements(key)
+        logging.getLogger(__name__).info(
+            "Attributes from amount of elements: {}".format(super().get_attributes_from_amount_of_elements(key)))
+        return super().get_attributes_from_amount_of_elements(key)

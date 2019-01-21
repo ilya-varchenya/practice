@@ -61,7 +61,7 @@ class WebBaseElement:
         """
         return self.driver.find_element(self.by, self.value).get_attribute(key)
 
-    def get_attribute_from_amount_of_elements(self, key):
+    def get_attributes_from_amount_of_elements(self, key):
         """
         Get attributes from amount of elements
         :param key: attribute name
