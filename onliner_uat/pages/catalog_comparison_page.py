@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 
 from onliner_uat.pages.base_page import BasePage
 from onliner_uat.web_elements.web_elements import WebLabel, WebElementList
-from onliner_uat.utils.regex_utils import get_number_from_string
+from onliner_uat.utils.regex_utils import get_list_of_numbers_from_string
 
 
 class CatalogComparisonPage(BasePage):
@@ -31,7 +31,7 @@ class CatalogComparisonPage(BasePage):
                 max_el = 0
                 position = 0
                 for item in range(len(list_of_4_items_text)):
-                    number = get_number_from_string(list_of_text[item])
+                    number = get_list_of_numbers_from_string(list_of_text[item])
                     if max_el < number:
                         max_el = number
                         position = item

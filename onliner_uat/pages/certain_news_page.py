@@ -5,7 +5,7 @@ from onliner_uat.pages.base_page import BasePage
 from onliner_uat.web_elements.web_elements import WebLink, WebButton, WebLabel
 from onliner_uat.pages.onliner_social_profiles import (YouTubePage, InstagramPage, TwitterPage, OKPage,
                                                        FacebookPage, VKPage, ConnectWithRedactionPage, RSSPage)
-from onliner_uat.utils.regex_utils import get_number_from_string
+from onliner_uat.utils.regex_utils import get_list_of_numbers_from_string
 
 
 class CertainNewsPage(BasePage):
@@ -42,7 +42,7 @@ class CertainNewsPage(BasePage):
         except NoSuchElementException:
             return False
         finally:
-            number_list = get_number_from_string(self.amount_of_comments.get_text())
+            number_list = get_list_of_numbers_from_string(self.amount_of_comments.get_text())
             number = int(number_list[0])
             return number > 100
 

@@ -1,1 +1,1 @@
-from .regex_utils import get_number_from_string
+from .regex_utils import get_list_of_numbers_from_string

@@ -12,7 +12,7 @@ class CertainCatalogGroupPage(BasePage):
     title_of_item = WebLink(By.XPATH, "//div[@class = 'schema-product__title']")
     preview_of_item = WebLabel(By.XPATH, "//span[@data-bind='html: product.description']")
     choice_check_boxes = WebElementList(By.XPATH, "//div[@class='schema-product schema-product_narrow-sizes']//span[@class = 'i-checkbox__faux']")
-    comparison_tip = WebElementList(By.XPATH, "//a[@class = 'compare-button__sub compare-button__sub_main']")
+    comparison_tip = WebLink(By.XPATH, "//a[@class = 'compare-button__sub compare-button__sub_main']")
 
     def __init__(self, driver):
         super().__init__(driver)

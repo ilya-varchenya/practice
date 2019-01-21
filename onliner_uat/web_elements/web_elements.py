@@ -112,6 +112,9 @@ class WebElementList(WebBaseElement):
         els = self.driver.find_elements(self.by, self.value)
         return [i.text for i in els]
 
+    def __len__(self):
+        return len(self.get())
+
     def get_attribute_from_amount_of_elements(self, key):
         """
         :param key: attribute name

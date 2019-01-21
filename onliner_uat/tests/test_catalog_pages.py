@@ -57,11 +57,11 @@ class TestCatalogPages(BaseTest):
     @pytest.mark.OC7
     def test_info_in_item_preview_should_be_the_same_with_info_under_title_of_item_page(self):
         catalog_page = self.start.go_to_catalog_page()
-        certain_catalog_group_page = catalog_page.go_to_certain_catalog_group()
+        certain_catalog_group_page = catalog_page.go_to_certain_catalog_group('Мобильные телефоны')
 
         text_of_preview = certain_catalog_group_page.get_text_of_preview()
 
-        certain_catalog_item_page = certain_catalog_group_page.go_to_certain_catalog_group()
+        certain_catalog_item_page = certain_catalog_group_page.go_to_certain_catalog_group('Мобильные телефоны')
 
         text_of_description = certain_catalog_item_page.get_text_from_description()
         assert text_of_preview == text_of_description
@@ -69,14 +69,14 @@ class TestCatalogPages(BaseTest):
     @pytest.mark.OC8
     def test_user_can_check_item_tips_for_add_items_to_comparison_list(self):
         catalog_page = self.start.go_to_catalog_page()
-        certain_catalog_group_page = catalog_page.go_to_certain_catalog_group()
+        certain_catalog_group_page = catalog_page.go_to_certain_catalog_group('Мобильные телефоны')
 
         assert certain_catalog_group_page.is_first_in_column_items_checked()
 
     @pytest.mark.OC9
     def test_best_choice_option_should_be_highlighted(self):
         catalog_page = self.start.go_to_catalog_page()
-        certain_catalog_group_page = catalog_page.go_to_certain_catalog_group()
+        certain_catalog_group_page = catalog_page.go_to_certain_catalog_group('Мобильные телефоны')
 
         catalog_comparison_page = certain_catalog_group_page.go_to_comparison_page()
 
