@@ -3,7 +3,6 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 from onliner_uat.web_elements.time_class_constants import TimeOutConstants
-from onliner_uat.web_elements.web_helpers import WebHelpers
 
 
 class WebBaseElement:
@@ -46,34 +45,14 @@ class WebBaseElement:
         """
         return self.driver.find_element(self.by, self.value).text
 
-    def get_text_from_amount_of_elements(self):
-        """
-        Get text from amount of elements
-        """
-        els = self.driver.find_elements(self.by, self.value)
-        return [i.lower() for i in els]
-
     def get_attribute(self, key):
         """
         Get attribute parameter
-                :param key: attribute name
+        :param key: attribute name
         :return: attribute value
         """
         return self.driver.find_element(self.by, self.value).get_attribute(key)
 
-    def get_attribute_from_amount_of_elements(self, key):
-        """
-        Get attributes from amount of elements
-        :param key: attribute name
-        :return: list of attributes
-        """
-        l_of_attr_val = []
-        els = self.driver.find_elements(self.by, self.value)
-        for i in range(len(els)):
-            el = els[0].find_elements(self.by, self.value)[i].get_attribute(key)
-            l_of_attr_val.append(el)
-        return l_of_attr_val
-
-    def with_text(self, text):
+    def with_text(self, text=''):
         self.value = self.value.format(text)
         return self
