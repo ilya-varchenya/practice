@@ -28,24 +28,28 @@ class WebBaseElement:
         return element
 
     def get(self, timeout=TimeOutConstants.PAGE_LOAD_TIMEOUT):
+        logging.getLogger(__name__).info("Element is: {}".format(self.get_element(timeout)))
         return self.get_element(timeout)
 
     def is_present(self):
         """
         Check is element present
         """
+        logging.getLogger(__name__).info("Element is present")
         return self.driver.find_element(self.by, self.value)
 
     def is_not_present(self):
         """
         Check is element not present
         """
+        logging.getLogger(__name__).info("Element is not present")
         return not(self.driver.find_element(self.by, self.value))
 
     def get_text(self):
         """
         Get text from element
         """
+        logging.getLogger(__name__).info("Element text: {}".format(self.driver.find_element(self.by, self.value).text))
         return self.driver.find_element(self.by, self.value).text
 
     def get_attribute(self, key):
@@ -54,20 +58,9 @@ class WebBaseElement:
         :param key: attribute name
         :return: attribute value
         """
+        logging.getLogger(__name__).info(
+            "Element attribute: {}".format(self.driver.find_element(self.by, self.value).get_attribute(key)))
         return self.driver.find_element(self.by, self.value).get_attribute(key)
-
-    def get_attributes_from_amount_of_elements(self, key):
-        """
-        Get attributes from amount of elements
-        :param key: attribute name
-        :return: list of attributes
-        """
-        l_of_attr_val = []
-        els = self.driver.find_elements(self.by, self.value)
-        for i in range(len(els)):
-            el = els[0].find_elements(self.by, self.value)[i].get_attribute(key)
-            l_of_attr_val.append(el)
-        return l_of_attr_val
 
     def with_text(self, text):
         self.value = self.value.format(text)

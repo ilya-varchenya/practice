@@ -53,6 +53,7 @@ class WebInput(IClick):
         """
         Clear input text fields
         """
+        logging.getLogger(__name__).info("Element input field cleared")
         self.driver.find_element(self.by, self.value).clear()
 
     def set_text(self, input_text):
@@ -72,6 +73,7 @@ class WebRadioButton(IClick):
         IClick.__init__(self, by, value)
 
     def is_checked(self):
+        logging.getLogger(__name__).info("Radiobutton is checked")
         return self.driver.findElements(self.by, self.value).getAttribute("checked")
 
 
@@ -82,6 +84,7 @@ class WebCheckBox(IClick):
         IClick.__init__(self, by, value)
 
     def is_checked(self):
+        logging.getLogger(__name__).info("CheckBox is checked")
         return self.driver.findElements(self.by, self.value).getAttribute('selected')
 
 
@@ -105,11 +108,13 @@ class WebElementList(WebBaseElement):
         """
         try:
             elements = WebDriverWait(self.driver, timeout).until(expected_conditions.presence_of_all_elements_located((self.by, self.value)))
+            logging.getLogger(__name__).info("WebElementList is: {}".format(elements))
         except NoSuchElementException:
             return False
         return elements
 
     def get(self, timeout=TimeOutConstants.PAGE_LOAD_TIMEOUT):
+        logging.getLogger(__name__).info("Elements are: {}".format(self.get_elements(timeout)))
         return self.get_elements(timeout)
 
     def get_text_from_amount_of_elements(self):
