@@ -27,7 +27,7 @@ class WebBaseElement:
     def get(self, timeout=TimeOutConstants.PAGE_LOAD_TIMEOUT):
         return self.get_element(timeout)
 
-    def get_length(self, timeout=TimeOutConstants.PAGE_LOAD_TIMEOUT):
+    def get_len(self, timeout=TimeOutConstants.PAGE_LOAD_TIMEOUT):
         """
         Get element summary
         """
