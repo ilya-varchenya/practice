@@ -27,6 +27,17 @@ class WebBaseElement:
     def get(self, timeout=TimeOutConstants.PAGE_LOAD_TIMEOUT):
         return self.get_element(timeout)
 
+    def get_length(self, timeout=TimeOutConstants.PAGE_LOAD_TIMEOUT):
+        """
+        Get element summary
+        """
+        try:
+            element = WebDriverWait(self.driver, timeout).until(
+                expected_conditions.presence_of_element_located((self.by, self.value)))
+        except NoSuchElementException:
+            return False
+        return len(element)
+
     def is_present(self):
         """
         Check is element present
