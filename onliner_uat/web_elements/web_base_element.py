@@ -1,9 +1,10 @@
+import logging
+
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 from onliner_uat.web_elements.time_class_constants import TimeOutConstants
-from onliner_uat.web_elements.web_helpers import WebHelpers
 
 
 class WebBaseElement:
@@ -21,6 +22,7 @@ class WebBaseElement:
         """
         try:
             element = WebDriverWait(self.driver, timeout).until(expected_conditions.presence_of_element_located((self.by, self.value)))
+            logging.getLogger(__name__).info("Element is: {}".format(element))
         except NoSuchElementException:
             return False
         return element
