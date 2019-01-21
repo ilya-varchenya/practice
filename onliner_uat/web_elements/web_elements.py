@@ -19,8 +19,8 @@ class WebLabel(WebBaseElement):
         """
         :return: text of element
         """
-        logging.getLogger(__name__).info(
-            "Text of element: {}".format(self.driver.find_element(self.by, self.value).text))
+        logging.getLogger(__name__).info("Text of element: {}\nby = {}\nvalue = {}".format(
+            self.driver.find_element(self.by, self.value).text, self.by, self.value))
         return self.driver.find_element(self.by, self.value).text
 
     def get_text_as_int(self):
@@ -29,8 +29,8 @@ class WebLabel(WebBaseElement):
         :return: integer value
         """
         try:
-            logging.getLogger(__name__).info(
-                "Text of element as integer: {}".format(self.driver.get_text_as_int(self.by, self.value)))
+            logging.getLogger(__name__).info("Text of element as integer: {}\nby = {}\nvalue = {}".format(
+                self.driver.get_text_as_int(self.by, self.value), self.by, self.value))
             return self.driver.get_text_as_int(self.by, self.value)
         except ValueError:
             return False
@@ -53,7 +53,7 @@ class WebInput(IClick):
         """
         Clear input text fields
         """
-        logging.getLogger(__name__).info("Element input field cleared")
+        logging.getLogger(__name__).info("Element input field cleared\nby = {}\nvalue = {}".format(self.by, self.value))
         self.driver.find_element(self.by, self.value).clear()
 
     def set_text(self, input_text):
@@ -62,7 +62,8 @@ class WebInput(IClick):
         :param input_text:
         """
         self.clear()
-        logging.getLogger(__name__).info("This text set to input field: {}".format(input_text))
+        logging.getLogger(__name__).info(
+            "This text set to input field: {}\nby = {}\nvalue = {}".format(input_text, self.by, self.value))
         self.driver.find_element(self.by, self.value).send_keys(input_text)
 
 
@@ -73,7 +74,7 @@ class WebRadioButton(IClick):
         IClick.__init__(self, by, value)
 
     def is_checked(self):
-        logging.getLogger(__name__).info("Radiobutton is checked")
+        logging.getLogger(__name__).info("Radiobutton is checked\nby = {}\nvalue = {}".format(self.by, self.value))
         return self.driver.findElements(self.by, self.value).getAttribute("checked")
 
 
@@ -84,7 +85,7 @@ class WebCheckBox(IClick):
         IClick.__init__(self, by, value)
 
     def is_checked(self):
-        logging.getLogger(__name__).info("CheckBox is checked")
+        logging.getLogger(__name__).info("CheckBox is checked\nby = {}\nvalue = {}".format(self.by, self.value))
         return self.driver.findElements(self.by, self.value).getAttribute('selected')
 
 
@@ -108,13 +109,15 @@ class WebElementList(WebBaseElement):
         """
         try:
             elements = WebDriverWait(self.driver, timeout).until(expected_conditions.presence_of_all_elements_located((self.by, self.value)))
-            logging.getLogger(__name__).info("WebElementList is: {}".format(elements))
+            logging.getLogger(__name__).info(
+                "WebElementList is: {}\nby = {}\nvalue = {}".format(elements, self.by, self.value))
         except NoSuchElementException:
             return False
         return elements
 
     def get(self, timeout=TimeOutConstants.PAGE_LOAD_TIMEOUT):
-        logging.getLogger(__name__).info("Elements are: {}".format(self.get_elements(timeout)))
+        logging.getLogger(__name__).info(
+            "Elements are: {}\nby = {}\nvalue = {}".format(self.get_elements(timeout), self.by, self.value))
         return self.get_elements(timeout)
 
     def get_text_from_amount_of_elements(self):
@@ -123,7 +126,7 @@ class WebElementList(WebBaseElement):
         """
         els = self.driver.find_elements(self.by, self.value)
         logging.getLogger(__name__).info(
-            "Text from amount of elements: {}".format([i.text for i in els]))
+            "Text from amount of elements: {}\nby = {}\nvalue = {}".format([i.text for i in els], self.by, self.value))
         return [i.text for i in els]
 
     def __len__(self):
@@ -139,5 +142,6 @@ class WebElementList(WebBaseElement):
         for i in range(len(els)):
             el = els[0].find_elements(self.by, self.value)[i].get_attribute(key)
             l_of_attr_val.append(el)
-        logging.getLogger(__name__).info("Attributes from amount of elements: {}".format(l_of_attr_val))
+        logging.getLogger(__name__).info(
+            "Attributes from amount of elements: {}\nby = {}\nvalue = {}".format(l_of_attr_val, self.by, self.value))
         return l_of_attr_val
