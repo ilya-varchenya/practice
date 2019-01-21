@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 
 from onliner_uat.pages.base_page import BasePage
 from onliner_uat.web_elements.web_elements import WebLabel, WebElementList
-from onliner_uat.utils.regular_expressions_service import get_number_from_string
+from onliner_uat.utils.regex_utils import get_number_from_string
 
 
 class CatalogComparisonPage(BasePage):
