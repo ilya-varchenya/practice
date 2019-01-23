@@ -65,3 +65,10 @@ class TestCatalogPages(BaseTest):
 
         text_of_description = certain_catalog_item_page.get_text_from_description()
         assert text_of_preview == text_of_description
+
+    @pytest.mark.OC8
+    def test_user_should_be_able_to_apply_some_filters_on_item_list(self):
+        catalog_page = self.start.go_to_catalog_page()
+        certain_catalog_group_page = catalog_page.go_to_certain_catalog_group()
+
+        assert certain_catalog_group_page.is_list_of_items_filtered_cheap_first()

@@ -1,5 +1,7 @@
 from onliner_uat.web_elements.web_base_element import WebBaseElement
 from onliner_uat.web_elements.IClick import IClick
+from onliner_uat.web_elements.time_class_constants import TimeOutConstants
+from onliner_uat.web_elements.web_helpers import WebHelpers
 
 
 class WebLabel(WebBaseElement):
@@ -93,15 +95,22 @@ class WebElementList(WebBaseElement):
         self.value = value
         WebBaseElement.__init__(self, by, value)
 
-    def get_text_from_amount_of_elements(self):
+    def get_text_from_amount_of_elements(self, timeout=TimeOutConstants.BUTTON_TIMEOUT):
         """
         Get text from amount of elements
         """
-        return super().get_text_from_amount_of_elements()
+        WebHelpers.pause(timeout)
+        els = self.driver.find_elements(self.by, self.value)
+        return [i.text for i in els]
 
     def get_attribute_from_amount_of_elements(self, key):
         """
         Get get attribute from amount of elements
         :param key: attribute name
         """
-        return super().get_attribute_from_amount_of_elements(key)
+        l_of_attr_val = []
+        els = self.driver.find_elements(self.by, self.value)
+        for i in range(len(els)):
+            el = els[0].find_elements(self.by, self.value)[i].get_attribute(key)
+            l_of_attr_val.append(el)
+        return l_of_attr_val
