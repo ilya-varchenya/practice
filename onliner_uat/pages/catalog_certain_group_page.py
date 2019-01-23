@@ -2,8 +2,13 @@ from selenium.webdriver.common.by import By
 
 from onliner_uat.pages.base_page import BasePage
 from onliner_uat.pages.catalog_certain_item_page import CatalogCertainItemPage
+<<<<<<< HEAD
 from onliner_uat.web_elements.web_elements import WebCheckBox, WebButton, WebLabel, WebLink, WebElementList
 from onliner_uat.utils.regex_service import get_list_of_numbers_from_string
+=======
+from onliner_uat.pages.catalog_comparison_page import CatalogComparisonPage
+from onliner_uat.web_elements.web_elements import WebCheckBox, WebButton, WebLabel, WebLink, WebElementList
+>>>>>>> 3442affb9e7becab1630c7f4f812818c54cec80c
 
 
 class CertainCatalogGroupPage(BasePage):
@@ -11,9 +16,14 @@ class CertainCatalogGroupPage(BasePage):
     amount_of_results_tip = WebButton(By.XPATH, "//div[contains(@class, 'schema-filter-button__state_initial')]")
     title_of_item = WebLink(By.XPATH, "//div[@class = 'schema-product__title']")
     preview_of_item = WebLabel(By.XPATH, "//span[@data-bind='html: product.description']")
+<<<<<<< HEAD
     cheap_order_tip = WebButton(By.XPATH, "//div[@class = 'schema-order__item']")
     list_of_prices = WebElementList(By.XPATH, "//div[@class = 'schema-product__price']//span")
     order_tip = WebButton(By.XPATH, "//a[@class = 'schema-order__link']")
+=======
+    choice_check_boxes = WebElementList(By.XPATH, "//div[@class='schema-product schema-product_narrow-sizes']//span[@class = 'i-checkbox__faux']")
+    comparison_tip = WebLink(By.XPATH, "//a[@class = 'compare-button__sub compare-button__sub_main']")
+>>>>>>> 3442affb9e7becab1630c7f4f812818c54cec80c
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -28,6 +38,7 @@ class CertainCatalogGroupPage(BasePage):
         self.title_of_item.click()
         return CatalogCertainItemPage(self.driver)
 
+<<<<<<< HEAD
     def is_list_of_items_filtered_cheap_first(self):
         self.order_tip.click()
         self.cheap_order_tip.click()
@@ -43,3 +54,21 @@ class CertainCatalogGroupPage(BasePage):
                 is_list_sorted = False
                 break
         return is_list_sorted
+=======
+    def is_first_in_column_items_checked(self, number_of_checked_items=3):
+        list_of_checked = []
+
+        list_of_elements = self.choice_check_boxes.get_elements()
+        counter = number_of_checked_items
+        for i in list_of_elements:
+            list_of_checked.append(i.click())
+            counter -= 1
+            if counter == 0:
+                break
+        return len(list_of_checked) == number_of_checked_items
+
+    def go_to_comparison_page(self):
+        self.is_first_in_column_items_checked()
+        self.comparison_tip.click()
+        return CatalogComparisonPage(self.driver)
+>>>>>>> 3442affb9e7becab1630c7f4f812818c54cec80c
