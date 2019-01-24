@@ -4,9 +4,10 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-from onliner_uat.web_elements.time_class_constants import TimeOutConstants
 from onliner_uat.web_elements.web_base_element import WebBaseElement
 from onliner_uat.web_elements.IClick import IClick
+from onliner_uat.web_elements.time_class_constants import TimeOutConstants
+from onliner_uat.web_elements.web_helpers import WebHelpers
 
 
 class WebLabel(WebBaseElement):
@@ -120,10 +121,11 @@ class WebElementList(WebBaseElement):
             "Elements are: {}\nby = {}\nvalue = {}".format(self.get_elements(timeout), self.by, self.value))
         return self.get_elements(timeout)
 
-    def get_text_from_amount_of_elements(self):
+    def get_text_from_amount_of_elements(self, timeout=TimeOutConstants.BUTTON_TIMEOUT):
         """
         :return:list of elements texts
         """
+        WebHelpers.pause(timeout)
         els = self.driver.find_elements(self.by, self.value)
         logging.getLogger(__name__).info(
             "Text from amount of elements: {}\nby = {}\nvalue = {}".format([i.text for i in els], self.by, self.value))

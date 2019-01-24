@@ -81,3 +81,10 @@ class TestCatalogPages(BaseTest):
         catalog_comparison_page = certain_catalog_group_page.go_to_comparison_page()
 
         assert catalog_comparison_page.is_the_best_of_first_sections_highlighted()
+
+    @pytest.mark.OC10
+    def test_user_should_be_able_to_apply_some_filters_on_item_list(self):
+        catalog_page = self.start.go_to_catalog_page()
+        certain_catalog_group_page = catalog_page.go_to_certain_catalog_group()
+
+        assert certain_catalog_group_page.is_list_of_items_filtered_cheap_first()
