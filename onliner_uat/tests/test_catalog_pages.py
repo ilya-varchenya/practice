@@ -67,13 +67,6 @@ class TestCatalogPages(BaseTest):
         assert text_of_preview == text_of_description
 
     @pytest.mark.OC8
-<<<<<<< HEAD
-    def test_user_should_be_able_to_apply_some_filters_on_item_list(self):
-        catalog_page = self.start.go_to_catalog_page()
-        certain_catalog_group_page = catalog_page.go_to_certain_catalog_group()
-
-        assert certain_catalog_group_page.is_list_of_items_filtered_cheap_first()
-=======
     def test_user_can_check_item_tips_for_add_items_to_comparison_list(self):
         catalog_page = self.start.go_to_catalog_page()
         certain_catalog_group_page = catalog_page.go_to_certain_catalog_group('Мобильные телефоны')
@@ -88,4 +81,10 @@ class TestCatalogPages(BaseTest):
         catalog_comparison_page = certain_catalog_group_page.go_to_comparison_page()
 
         assert catalog_comparison_page.is_the_best_of_first_sections_highlighted()
->>>>>>> 3442affb9e7becab1630c7f4f812818c54cec80c
+
+    @pytest.mark.OC10
+    def test_user_should_be_able_to_apply_some_filters_on_item_list(self):
+        catalog_page = self.start.go_to_catalog_page()
+        certain_catalog_group_page = catalog_page.go_to_certain_catalog_group()
+
+        assert certain_catalog_group_page.is_list_of_items_filtered_cheap_first()

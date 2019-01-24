@@ -64,10 +64,6 @@ class WebBaseElement:
             self.driver.find_element(self.by, self.value).get_attribute(key), self.by, self.value))
         return self.driver.find_element(self.by, self.value).get_attribute(key)
 
-<<<<<<< HEAD
-    def with_text(self, text):
-=======
     def with_text(self, text=''):
->>>>>>> 3442affb9e7becab1630c7f4f812818c54cec80c
         self.value = self.value.format(text)
         return self
